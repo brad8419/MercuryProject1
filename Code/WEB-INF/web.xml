@@ -7,8 +7,7 @@
 		http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
 		id="WebApp_ID" version="3.0">
 	
-	
-	<!-- Spring MVC -->
+  	<!-- Spring MVC -->
   	<servlet>
     	<servlet-name>finance</servlet-name>
     	<servlet-class>
@@ -20,6 +19,20 @@
     	<servlet-name>finance</servlet-name>
     	<url-pattern>*.html</url-pattern>
   	</servlet-mapping>
-	
-  	<!-- done till this point -->
+  	
+  	<!-- Spring Listeners and Corresponding parameters -->
+  	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+  	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>
+			/WEB-INF/finance-*.xml
+		</param-value>
+  	</context-param>
+  	
+  	<welcome-file-list>
+    	<welcome-file>/security/login.htm</welcome-file>
+  	</welcome-file-list>
+  	
 </web-app>

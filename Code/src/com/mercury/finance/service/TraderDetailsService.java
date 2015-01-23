@@ -16,13 +16,13 @@ import com.mercury.finance.model.Trader;
 public class TraderDetailsService{
 	@Autowired
 	@Qualifier("traderDao")
-	private HibernateDao<Trader, String> td;
+	private HibernateDao<Trader, Integer> td;
 	
-	public void setTd(HibernateDao<Trader, String> td) {
+	public void setTd(HibernateDao<Trader, Integer> td) {
 		this.td = td;
 	}
 	
-	public HibernateDao<Trader, String> getTd(){
+	public HibernateDao<Trader, Integer> getTd(){
 		return td;
 	}
 

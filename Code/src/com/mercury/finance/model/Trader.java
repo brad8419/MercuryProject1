@@ -23,8 +23,6 @@ public class Trader {
 	public String email;
 	public String role;
 	public int balance;
-	public Login login;
-	public Set<Transaction> transactions = new HashSet<Transaction>(0);
 	
 	public Trader(){}
 
@@ -40,7 +38,7 @@ public class Trader {
 		this.tid = tid;
 	}
 	
-	@Column(name = "fname", nullable = false, length = 30)
+	@Column(name = "fname",  length = 30)
 	public String getFname() {
 		return fname;
 	}
@@ -49,7 +47,7 @@ public class Trader {
 		this.fname = fname;
 	}
 	
-	@Column(name = "lname", nullable = false, length = 30)
+	@Column(name = "lname",length = 30)
 	public String getLname() {
 		return lname;
 	}
@@ -57,7 +55,7 @@ public class Trader {
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	@Column(name = "email", nullable = false, length = 30)
+	@Column(name = "email", length = 30)
 	public String getEmail() {
 		return email;
 	}
@@ -66,7 +64,7 @@ public class Trader {
 		this.email = email;
 	}
 
-	@Column(name = "role", nullable = false, length = 20)
+	@Column(name = "role", length = 20)
 	public String getRole() {
 		return role;
 	}
@@ -83,24 +81,6 @@ public class Trader {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "trader", cascade = CascadeType.ALL)
-	public Login getLogin() {
-		return login;
-	}
-
-	public void setLogin(Login login) {
-		this.login = login;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Trader")
-	public Set<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(Set<Transaction> transactions) {
-		this.transactions = transactions;
-	};
 	
 
 }

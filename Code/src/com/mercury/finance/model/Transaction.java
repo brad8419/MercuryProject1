@@ -15,8 +15,6 @@ import javax.persistence.Table;
 public class Transaction {
 	public int trans_id;
 	public int qty;
-	public Trader trader;
-	public Stock stock;
 	public String status;
 	public String t_date;
 	public String process;
@@ -31,22 +29,7 @@ public class Transaction {
 	public void setTrans_id(int trans_id) {
 		this.trans_id = trans_id;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tid", nullable = false)
-	public Trader getTrader() {
-		return trader;
-	}
-	public void setTrader(Trader trader) {
-		this.trader = trader;
-	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sid", nullable = false)
-	public Stock getSid() {
-		return stock;
-	}
-	public void setSid(Stock stock) {
-		this.stock = stock;
-	}
+
 	@Column(name = "qty")
 	public int getQty() {
 		return qty;
