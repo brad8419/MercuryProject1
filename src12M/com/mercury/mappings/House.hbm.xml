@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+	<class name="com.mercury.beans.House" table="House">
+		<id name="hid" column="HID"></id>
+		<property name="address" column="Address"></property>
+		<set name="visitors" table="Visitor" cascade="all" inverse="true">
+			<key column="HID" foreign-key="HID"></key>
+			<one-to-many class="com.mercury.beans.Visitor"/>
+		</set>
+	</class>
+</hibernate-mapping>

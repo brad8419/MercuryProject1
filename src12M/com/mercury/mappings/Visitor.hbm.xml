@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+	<class name="com.mercury.beans.Visitor" table="Visitor">
+		<id name="vid" column="VID"/>
+		<property name="vname" column="VName"></property>
+		<property name="hid" column="HID"></property>
+	</class>
+</hibernate-mapping>
