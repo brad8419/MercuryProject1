@@ -774,287 +774,109 @@ angular.module("mainModule", [])
 
 
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-<!-- from Oscar's project registerXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-
-<div class="modal fade" ng-controller="mainController" id="Register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">Forms</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" name="registerform" onSubmit="md5Encrypt(this)" role="form" action="register.htm" method="POST" id="register-form">
-          <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
-          <div class="form-group">
-              <label for="r_username" class="col-sm-2 control-label">Username:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="r_username" id="r_username" ng-model="user.username" placeholder="Username" required>
-                <span class="col-md-4" ng-show="registerform.r_username.$dirty && registerform.r_username.$invalid">Required</span>
-              </div>
-            </div> 
-            
-            <div class="alert" style="display:none;" id="userExist">
-	        <p>The user already exists</p>
-            </div>
-          
-          <div class="form-group">
-              <label for="r_password" class="col-sm-2 control-label">Password:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              <div class="col-sm-6">
-                <input type="password" class="form-control" name="r_password" ng-model="user.r_password" id="r_password" placeholder="Password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
-                <span class="col-md-4" ng-show="registerform.r_password.$dirty && registerform.r_password.$error.required">Required</span>
-                <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
-
-              </div>
-            </div>
-
-
-          <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd1">Confirm Password:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">          
-          <input type="password" class="form-control" name="r_r_password" id="r_r_password" ng-model="user.r_r_password" password-verify="user.r_password" placeholder="Re-enter password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
-          </div>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.required">Required</span>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.passwordVerify">Password does not match</span>
-           <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
-          <!-- <button type="button" onclick="check()" value="Check">Check</button> -->
-        </div>
-
-          <div class="form-group">
-          <label class="control-label col-sm-2" for="r_firstname">Firstname:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">
-            <input onclick="check()"type="text" class="form-control" name="r_firstname" id="r_firstname" ng-model="user.r_firstname" placeholder="Enter Firstname" required>
-         	<span class="col-md-4" ng-show="registerform.r_firstname.$dirty && registerform.r_firstname.$error.required">Required</span>
-
-          </div>
-        </div>
-
-
-           <div class="form-group">
-          <label class="control-label col-sm-2" for="r_lastname">Lastname:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" name="r_lastname" id="r_lastname" ng-model="user.r_lastname" placeholder="Enter Lastname" required>
-            <span class="col-md-4" ng-show="registerform.r_lastname.$dirty && registerform.r_lastname.$error.required">Required</span>
-
-          </div>
-        </div>
-
-
-            <div class="form-group">
-              <label for="r_email" class="col-sm-2 control-label">Email:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              <div class="col-sm-6">
-                <input type="email" class="form-control" name="r_email" id="r_email" ng-model="user.r_email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"  placeholder="Email" required>
-                    <span class="col-md-4" ng-show="registerform.r_email.$dirty && registerform.r_email.$error.required">Required</span>
-                    <span class="col-md-4" ng-show="registerform.r_email.$dirty && registerform.r_email.$error.email">Invalid Email</span>
-              </div>
-            </div>
-            
-         
-
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="r_address">Address:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_address" id="r_address" ng-model="user.r_address" placeholder="Enter address">
-            <span class="col-md-4" ng-show="registerform.r_address.$dirty && registerform.r_address.$error.required">Required</span>
-          </div>
-        </div>
-
-
-
-         <div class="form-group">
-          <label class="control-label col-sm-2" for="r_city">City:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_city" id="r_city" placeholder="Enter city">
-          </div>
-        </div>
-
-         <div class="form-group">
-          <label class="control-label col-sm-2" for="r_state">State:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_state" id="r_state" placeholder="Enter state">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="r_zipcode">Zipcode:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_zipcode" id="r_zipcode" placeholder="Enter state">
-          </div>
-        </div>
-
-           <div class="form-group">
-          <label class="control-label col-sm-2" for="r_phone">Phone:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_phone" id="r_phone" placeholder="Enter phone">
-          </div>
-        </div>
-
-
-          
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" >Sign Up</button>
-              </div>
-            </div>
-          </form>
-          
-        </div>
-       
-     </div>
-    </div>
-  </div>
-
-
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
- <div class="modal fade"  ng-controller="mainController" id="Register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">Forms</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal" name="registerform" onSubmit="md5Encrypt(this)" role="form" action="register.htm" method="POST" id="register-form">
-          <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
-          <div class="form-group">
-              <label for="r_username" class="col-sm-2 control-label">Username:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="r_username" id="r_username" ng-model="user.username" placeholder="Username" required>
-                <span class="col-md-4" ng-show="registerform.r_username.$dirty && registerform.r_username.$invalid">Required</span>
-              </div>
-            </div> 
-            
-            <div class="alert" style="display:none;" id="userExist">
-	        <p>The user already exists</p>
-            </div>
-          
-          <div class="form-group">
-              <label for="r_password" class="col-sm-2 control-label">Password:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              <div class="col-sm-6">
-                <input type="password" class="form-control" name="r_password" ng-model="user.r_password" id="r_password" placeholder="Password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
-                <span class="col-md-4" ng-show="registerform.r_password.$dirty && registerform.r_password.$error.required">Required</span>
-                <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
-
-              </div>
-            </div>
-
-
-          <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd1">Confirm Password:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">          
-          <input type="password" class="form-control" name="r_r_password" id="r_r_password" ng-model="user.r_r_password" password-verify="user.r_password" placeholder="Re-enter password must between 6 to 20" required ng-minlength="6" ng-maxlength="20">
-          </div>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.required">Required</span>
-         <span class="col-md-4" ng-show="registerform.r_r_password.$dirty && registerform.r_r_password.$error.passwordVerify">Password does not match</span>
-           <span class="col-md-4" ng-show="registerform.password.$dirty && (registerform.password.$error.minlength || registerform.password.$error.maxlength)">6 to 20 characters</span>
-          <!-- <button type="button" onclick="check()" value="Check">Check</button> -->
-        </div>
-
-          <div class="form-group">
-          <label class="control-label col-sm-2" for="r_firstname">Firstname:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">
-            <input onclick="check()"type="text" class="form-control" name="r_firstname" id="r_firstname" ng-model="user.r_firstname" placeholder="Enter Firstname" required>
-         	<span class="col-md-4" ng-show="registerform.r_firstname.$dirty && registerform.r_firstname.$error.required">Required</span>
-
-          </div>
-        </div>
-
-
-           <div class="form-group">
-          <label class="control-label col-sm-2" for="r_lastname">Lastname:</label>
-          <span class="glyphicon glyphicon-asterisk"></span>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" name="r_lastname" id="r_lastname" ng-model="user.r_lastname" placeholder="Enter Lastname" required>
-            <span class="col-md-4" ng-show="registerform.r_lastname.$dirty && registerform.r_lastname.$error.required">Required</span>
-
-          </div>
-        </div>
-
-
-            <div class="form-group">
-              <label for="r_email" class="col-sm-2 control-label">Email:</label>
-              <span class="glyphicon glyphicon-asterisk"></span>
-              <div class="col-sm-6">
-                <input type="email" class="form-control" name="r_email" id="r_email" ng-model="user.r_email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"  placeholder="Email" required>
-                    <span class="col-md-4" ng-show="registerform.r_email.$dirty && registerform.r_email.$error.required">Required</span>
-                    <span class="col-md-4" ng-show="registerform.r_email.$dirty && registerform.r_email.$error.email">Invalid Email</span>
-              </div>
-            </div>
-            
-         
-
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="r_address">Address:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_address" id="r_address" ng-model="user.r_address" placeholder="Enter address">
-            <span class="col-md-4" ng-show="registerform.r_address.$dirty && registerform.r_address.$error.required">Required</span>
-          </div>
-        </div>
-
-
-
-         <div class="form-group">
-          <label class="control-label col-sm-2" for="r_city">City:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_city" id="r_city" placeholder="Enter city">
-          </div>
-        </div>
-
-         <div class="form-group">
-          <label class="control-label col-sm-2" for="r_state">State:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_state" id="r_state" placeholder="Enter state">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="r_zipcode">Zipcode:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_zipcode" id="r_zipcode" placeholder="Enter state">
-          </div>
-        </div>
-
-           <div class="form-group">
-          <label class="control-label col-sm-2" for="r_phone">Phone:</label>
-          <div class="col-sm-6">          
-            <input type="text" class="form-control" name="r_phone" id="r_phone" placeholder="Enter phone">
-          </div>
-        </div>
-
-
-          
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" >Sign Up</button>
-              </div>
-            </div>
-          </form>
-          
-        </div>
-        
-
-
-
-
-
-      
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<div class="modal fade" ng-controller="mainController" id="Register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Register here please:</h4>
       </div>
-    </div>
-  </div>
+      <div class="modal-body">
+        <form id="register-form" name="f" class="form-horizontal" action="" method="post" role="form">
+       
+          <div class="form-group">
+          	<label for="username" class="col-sm-2 col-sm-offset-1 control-label">Username</label>
+          	<div id="username1" class="col-sm-7">
+           	<input type="text" class="form-control register01 col-md-8" name="username" id="username"  ng-model="textValue" ng-change="onTextChange()" placeholder="Username">
+         	</div><div class="col-sm-1"><img class="iccc" id="un1" style="display:none;"  alt="" src="img/r1.png"/></div>
+         	
+         	
+         </div>
+          <div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="registerUsername">
+			<p>This user name has already bean used. Please enter something else!</p>
+	   </div>
+         <div class="form-group">
+          	<label for="email" class="col-sm-2 col-sm-offset-1 control-label">Email</label>
+          	<div id="email1" class="col-sm-7">
+           	<input type="text" class="form-control register01" name="email" id="email" ng-model="emailValue" ng-change="onTextChange2()" placeholder="Email">
+         	</div><div class="col-sm-1"><img class="iccc" id="em1" style="display:none;"  alt="" src="img/r1.png"/></div>
+         </div>
+         <div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="emailValid">
+	<p>Please enter an real email address!</p>
+</div>
+<div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="emailExsist">
+	<p>This email address has been registered!</p>
+</div>
+         <div class="form-group">
+          	<label for="cEmail" class="col-sm-2 col-sm-offset-1 control-label">Confirm Email</label>
+          	<div id="email2" class="col-sm-7">
+           	<input type="text" class="form-control register01" name="cEmail" id="cEmail" ng-model="emailValueC" ng-change="onTextChange3()"  placeholder="Confirm Email">
+         	</div><div class="col-sm-1"><img class="iccc" id="em2" style="display:none;"  alt="" src="img/r1.png"/></div>
+         	
+         </div>
+         <div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="registerEmail">
+	<p>Email does not match that you just confirmed!</p>
+</div>
+         <div id="password1" class="form-group">
+          	<label for="password" class="col-sm-2 col-sm-offset-1 control-label">Password</label>
+          	<div class="col-sm-7">
+           	<input type="password" class="form-control register01" name="password" id="password" ng-model="pwdValue" ng-change="onTextChange4()"  placeholder="Password">
+         	</div><div class="col-sm-1"><img class="iccc" id="pw1" style="display:none;"  alt="" src="img/r1.png"/></div>
+         </div>
+         <div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="registerPassword">
+	<p>Your password must have at least 6 charaters!</p>
+</div>
 
+
+
+<div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="passwordShort">
+	<p>You must enter a password with more than 6 characters!</p>
+</div>
+         <div id="password2" class="form-group">
+          	<label for="cPassword" class="col-sm-2 col-sm-offset-1 control-label">Confirm Password</label>
+          	<div class="col-sm-7">
+           	<input type="password" class="form-control register01" name="cPassword" id="cPassword" ng-model="pwdValue2" ng-change="onTextChange5()"  placeholder="Confirm Password">
+         	</div><div class="col-sm-1"><img class="iccc" id="pw2" style="display:none;" alt="" src="img/r1.png"/></div>
+         </div>  
+       <!-- Alerts for missing form info  --> 
+       
+      
+
+<div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="registerPassword">
+	<p>Your password must have at least 6 charaters!</p>
+</div>
+
+
+
+<div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="passwordShort">
+	<p>You must enter a password with more than 6 characters!</p>
+</div>
+<div class="alert alert-warning col-sm-7 col-sm-offset-3" style="display:none;" id="passwordDiff">
+	<p>Your password is different from what you just confirmed!</p>
+</div>
+<div class="alert alert-warning col-sm-7 col-sm-offset-3" id="wrongCredentials" style="display:none;">
+	<p>Your password and username does not match!<br> Or you can register here:<a href="#info" data-toggle="modal" data-target="#Register">Register</a></p>
+</div>
+
+<div class="alert alert-danger col-sm-9 col-sm-offset-1" style="display:none;" id="subPass">
+			<p>Please complete all blanks before submission!</p>
+	   </div>
+       
+
+	<button id="register" type="submit" class="btn btn-success col-sm-offset-1">Register</button>
+      <button class="btn btn-info" type="reset" id="rclr">Clear</button>
+       
+      
+        </form>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
@@ -1068,25 +890,23 @@ angular.module("mainModule", [])
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Now Meet Our Creaters</h4>
+        <h4 class="modal-title">team</h4>
       </div>
       <div class="modal-body row">
       	<div class="col-md-5">
-      	<b>Jacob Fan</b>
-      	<img id="img98" alt="" src="img/94.jpg" class="img-circle img99">
+      	<b>    </b>
+      	<img id="img98" alt="" src="" class="img-circle img99">
       	
       	</div>
         <div class="col-md-5 col-md-offset-1">
-        <b>Evan Luo</b>
-        <img id="img97" alt="" src="img/90.jpg" class="img-circle img99">
+        <b>   </b>
+        <img id="img97" alt="" src="" class="img-circle img99">
         
         </p>
         </div>
         <div class="col-md-12">
-        <p id="pkg01" style="display:none;"> <b>Jacob---SR. Web developer+Software developer</b><br>Knowladge Skills: C,C++,JAVA,SQL,PHP,Python,HTML5,XML,CSS3,JavaScript,Ajax,jQuery,
-      	jQueryUI,Node.JS, AngularJS,Socket.io,Webworker,Apache Lucene,Spring,Struts,Hibernate,EJB,etc. </p>
-      	<p id="pkg02" style="display:none;"><b>Evan---SR. Web developer+Software developer</b><br>Knowladge Skills: C, JAVA, PHP, Python/Django, HTML5,XML,CSS3,JavaScript,Ajax,jQuery, Json, REST web service,
-        Spring, Spring Security, Hibernate, struts,Agularjs
+        <p id="pkg01" style="display:none;"></p>
+      	<p id="pkg02" style="display:none;"></p>
         </div>
 	
       </div>
