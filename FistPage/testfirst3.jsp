@@ -679,7 +679,7 @@ angular.module("mainModule", [])
       
 
     
-    <li class="col-md-1"><a href="calculator.html">HOME</a></li>
+    <li class="col-md-1"><a href="">HOME</a></li>
     <li class="col-md-1"><a href="#" data-toggle="modal" data-target="#mdl02">AboutUs</a></li>
     <li class="col-md-1"><a id="mtgc" href="">Transaction</a></li>
     <li class="col-md-1"><a id="mtgc" href="">MarketData</a></li>
